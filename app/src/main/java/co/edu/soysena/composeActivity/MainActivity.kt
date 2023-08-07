@@ -36,8 +36,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.shape.AbsoluteCutCornerShape
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,20 +73,38 @@ data class Message(val author: String, val body: String)
 @Composable
 fun header(){
     ComposeActivityTheme {
-        Box{
-            Row (){
-                Column() {
-                    Image(
-                        painter = painterResource(R.drawable.bxs_message_square_dots),
-                        contentDescription = "Contact profile picture",
-                        modifier = Modifier
-                            .size(55.dp)
-                            .clip(CircleShape)
-                    )
-                }
-                Column() {
-                    Text(text = "Feedback Zone | Developers")
-                }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(80.dp)
+                .background(MaterialTheme.colorScheme.primary)
+        ){
+            Column(
+                modifier = Modifier
+                    .padding(all = 5.dp)
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.bxs_message_square_dots),
+                    contentDescription = "Logo of the app.",
+                    modifier = Modifier
+                        .size(69.dp)
+                        .background(Color.White, shape = AbsoluteRoundedCornerShape(10.dp))
+                )
+            }
+            Spacer(
+                modifier = Modifier
+                    .width(10.dp)
+            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Text(
+                    text = "Feedback Zone | Developers",
+                    textAlign = TextAlign.End,
+                    style = MaterialTheme.typography.headlineLarge,
+
+                )
             }
         }
     }
@@ -111,7 +135,7 @@ fun MessageCard(msg: Message) {
                 painter = painterResource(R.drawable.user),
                 contentDescription = "Contact profile picture",
                 modifier = Modifier
-                    .border(1.5.dp, MaterialTheme.colorScheme.error, CircleShape)
+                    .border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
                     .size(55.dp)
                     .clip(CircleShape)
 
