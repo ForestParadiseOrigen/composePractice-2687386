@@ -36,17 +36,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeActivityTheme {
+                Spacer(modifier = Modifier.padding(10.dp))
                 Surface(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Conversation(SampleData.conversationSample)
+                    Column{
+                        header()
+
+                        Spacer(modifier = Modifier.height(10.dp))
+
+                        Conversation(SampleData.conversationSample)
+                    }
                 }
             }
         }
@@ -54,6 +63,28 @@ class MainActivity : ComponentActivity() {
 }
 
 data class Message(val author: String, val body: String)
+
+@Composable
+fun header(){
+    ComposeActivityTheme {
+        Box{
+            Row (){
+                Column() {
+                    Image(
+                        painter = painterResource(R.drawable.bxs_message_square_dots),
+                        contentDescription = "Contact profile picture",
+                        modifier = Modifier
+                            .size(55.dp)
+                            .clip(CircleShape)
+                    )
+                }
+                Column() {
+                    Text(text = "Feedback Zone | Developers")
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun Conversation(messages: List<Message>) {
@@ -66,7 +97,7 @@ fun Conversation(messages: List<Message>) {
 
 @Composable
 fun PreviewConversation() {
-    ComposeActivityTheme() {
+    ComposeActivityTheme {
         Conversation(SampleData.conversationSample)
     }
 }
@@ -107,7 +138,9 @@ fun MessageCard(msg: Message) {
                 shape = MaterialTheme.shapes.medium,
                 color = surfaceColor,
 
-                modifier = Modifier.animateContentSize().padding(1.dp)
+                modifier = Modifier
+                    .animateContentSize()
+                    .padding(1.dp)
             ) {
                 Text(
                     text = msg.body,

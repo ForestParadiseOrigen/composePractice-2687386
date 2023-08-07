@@ -4,45 +4,36 @@ object SampleData {
     // Sample conversation data
     val conversationSample = listOf(
         Message(
-            "Colleague",
-            "Test...Test...Test..."
+            "Sandra Barrera",
+            "La app esta bien, no tiene problemas de rendimiento. Sin embargo esperaba algo mas de contenido."
         ),
         Message(
-            "Colleague",
-            "List of Android versions:\n" +
-                    "Android KitKat (API 19)\n" +
-                    "Android Lollipop (API 21)\n" +
-                    "Android Marshmallow (API 23)\n" +
-                    "Android Nougat (API 24)\n" +
-                    "Android Oreo (API 26)\n" +
-                    "Android Pie (API 28)\n" +
-                    "Android 10 (API 29)\n" +
-                    "Android 11 (API 30)\n" +
-                    "Android 12 (API 31)\n"
+            "Santiago Herrera",
+            "La app tiene serios problemas con el manejo de color en los elementos. Hay que mejorarlos."
         ),
         Message(
-            "Colleague",
-            "I think Kotlin is my favorite programming language.\n" +
-                    "It's so much fun!"
+            "Hernando Suarez",
+            "¿Que se fumo el desarrollador de esta app?"
         ),
         Message(
-            "Colleague",
-            "Searching for alternatives to XML layouts..."
+            "Ronaldo Matrinez",
+            "En caso de que necesiten desarrolladores, cominiquense a este correo electronico\n" +
+                    "EstaAppEstaRota@Ubicate.com"
         ),
         Message(
-            "Colleague",
-            "Hey, take a look at Jetpack Compose, it's great!\n" +
-                    "It's the Android's modern toolkit for building native UI." +
-                    "It simplifies and accelerates UI development on Android." +
-                    "Less code, powerful tools, and intuitive Kotlin APIs :)"
+            "Maria Santa",
+            "Tuve algunos problemas para abrir la app.\n" +
+                    "Por favor, recuerden no publicar productos problematicos." +
+                    "La arquitectura de este proyecto es un poco basica." +
+                    "Desarrolladores, recuerden que hay tutoriales para todo en internet. Actualizen el producto."
         ),
         Message(
-            "Colleague",
-            "It's available from API 21+ :)"
+            "KanyeFan_356",
+            "Esta app necesita un funcion nueva. Como por ejemplo, dejar reproducir musica de fondo."
         ),
         Message(
-            "Colleague",
-            "Writing Kotlin for UI seems so natural, Compose where have you been all my life?"
+            "Lorenzo Anzola",
+            "Tuve un problema al abrir la app. Ademas, no se por que no se me despliegan las casillas para ver el resto del mensaje."
         ),
         Message(
             "Colleague",
