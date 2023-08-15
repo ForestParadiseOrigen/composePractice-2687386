@@ -41,139 +41,183 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.AbsoluteCutCornerShape
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeActivityTheme {
-                Spacer(modifier = Modifier.padding(10.dp))
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column{
-                        header()
+                //Columns and rows
+                ColumnsAndRows()
 
-                        Spacer(modifier = Modifier.height(10.dp))
-
-                        Conversation(SampleData.conversationSample)
-                    }
-                }
             }
         }
     }
 }
 
-data class Message(val author: String, val body: String)
-
-//HEADER
+// COLUMNS AND ROWS
 @Composable
 @Preview
-fun header(){
-    ComposeActivityTheme {
-        Row(
-            modifier = Modifier
+private fun ColumnsAndRows() {
+    Surface(color = MaterialTheme.colorScheme.background) {
+        Column{
+
+            //First Row
+            Row(modifier = Modifier
                 .fillMaxWidth()
-                .height(51.dp)
+                .padding(10.dp)
                 .background(MaterialTheme.colorScheme.primary)
-        ){
-            Column(
-                modifier = Modifier
-                    .padding(all = 5.dp)
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.google_single_simbol),
-                    contentDescription = "Logo of the app.",
-                    modifier = Modifier
-                        .size(50.dp)
-                )
+            ){
+                Text("Esta es una fila.")
             }
-            Spacer(
-                modifier = Modifier
-                    .width(10.dp)
-            )
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
+
+            //Divider between rows
+            Spacer(modifier = Modifier .padding(vertical = 5.dp))
+
+            //Second Row
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+                .background(MaterialTheme.colorScheme.primary)
+            ){
+
+                Column(modifier = Modifier
+                    .width(50.dp)
+                    .height(50.dp)
+                    .background(MaterialTheme.colorScheme.secondary)
+                ){
+                    Text("Esta es una columna.")
+                }
+
+                Spacer(modifier = Modifier .width(5.dp))
+
+                Column(modifier = Modifier
+                    .width(50.dp)
+                    .height(50.dp)
+                    .background(MaterialTheme.colorScheme.secondary)
+                ){
+                    Text("Esta es una columna.")
+                }
+
+                Spacer(modifier = Modifier .width(5.dp))
+
+                Column(modifier = Modifier
+                    .width(50.dp)
+                    .height(50.dp)
+                    .background(MaterialTheme.colorScheme.secondary)
+                ){
+                    Text("Esta es una columna.")
+                }
+
+                Spacer(modifier = Modifier .width(5.dp))
+
+                Column(modifier = Modifier
+                    .width(50.dp)
+                    .height(50.dp)
+                    .background(MaterialTheme.colorScheme.secondary)
+                ){
+                    Text("Esta es una columna.")
+                }
+
+                Spacer(modifier = Modifier .width(5.dp))
+
+                Column(modifier = Modifier
+                    .width(50.dp)
+                    .height(50.dp)
+                    .background(MaterialTheme.colorScheme.secondary)
+                ){
+                    Text("Esta es una columna.")
+                }
+
+                Spacer(modifier = Modifier .width(5.dp))
+
+            }
+        }
+    }
+} // END COLUMNS AND ROWS
+
+// CARDS WHITH BUTTOMS
+@Composable
+private fun Greeting(name: String) {
+
+    Surface(
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Row(modifier = Modifier.padding(24.dp)) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = "¡Buenas! ")
+                Text(text = name)
+            }
+            ElevatedButton(
+                onClick = { /* TODO */ }
             ) {
-                Text(
-                    text = "Feedback Zone | Developers",
-                    textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = MaterialTheme.colorScheme.background
-                )
+                Text("Mostrar mas")
             }
         }
     }
 }
 
 @Composable
-fun Conversation(messages: List<Message>) {
-    LazyColumn {
-        items(messages) { message ->
-            MessageCard(message)
+fun MyApp(
+    modifier: Modifier = Modifier,
+    names: List<String> = listOf("Hernando", "Ronaldo")
+) {
+    Column(modifier = modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
         }
     }
 }
 
+
+
+@Preview(showBackground = true, widthDp = 320)
 @Composable
-fun PreviewConversation() {
+fun DefaultPreview() {
     ComposeActivityTheme {
-        Conversation(SampleData.conversationSample)
+        MyApp()
     }
 }
 
-// Body of the message card.
+// END CARD WHITH BUTTOMS
+
+// ELEVATION OF STATE
+
 @Composable
-fun MessageCard(msg: Message) {
-    Row(modifier = Modifier.padding(all = 8.dp)) {
-        Column {
-            Image(
-                painter = painterResource(R.drawable.user),
-                contentDescription = "Contact profile picture",
-                modifier = Modifier
-                    .border(1.5.dp, MaterialTheme.colorScheme.primary, CircleShape)
-                    .size(55.dp)
-                    .clip(CircleShape)
+fun OnboardingScreen(modifier: Modifier = Modifier) {
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
 
-
-            )
-        }
-
-        Spacer(modifier = Modifier.width(8.dp))
-
-        var isExpanded by remember { mutableStateOf(false) }
-        val surfaceColor by animateColorAsState(
-            if (isExpanded) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.surface,
-        )
-        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
-            Text(
-                text = msg.author,
-                color = MaterialTheme.colorScheme.secondary,
-                style = MaterialTheme.typography.titleMedium
-            )
-
-            Spacer(modifier = Modifier.height(4.dp))
-
-            Surface(
-                shape = MaterialTheme.shapes.medium,
-                color = surfaceColor,
-
-                modifier = Modifier
-                    .animateContentSize()
-                    .padding(1.dp)
-            ) {
-                Text(
-                    text = msg.body,
-                    modifier = Modifier.padding(all = 4.dp),
-                    maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                    style = MaterialTheme.typography.titleSmall
-                )
-            }
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("¡BIENVENIDO! Esta es una aplicacion creada con Jetpack Compose.")
+        Button(
+            modifier = Modifier.padding(vertical = 24.dp),
+            onClick = { shouldShowOnboarding = false }
+        ) {
+            Text("Continue")
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 320, heightDp = 320)
+@Composable
+fun OnboardingPreview() {
+    ComposeActivityTheme {
+        OnboardingScreen()
+    }
+}
+
+// END ELEVATION OF STATE
