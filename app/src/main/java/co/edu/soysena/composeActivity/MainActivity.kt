@@ -70,13 +70,15 @@ class MainActivity : ComponentActivity() {
 
 data class Message(val author: String, val body: String)
 
+//HEADER
 @Composable
+@Preview
 fun header(){
     ComposeActivityTheme {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(80.dp)
+                .height(51.dp)
                 .background(MaterialTheme.colorScheme.primary)
         ){
             Column(
@@ -84,11 +86,10 @@ fun header(){
                     .padding(all = 5.dp)
             ) {
                 Image(
-                    painter = painterResource(R.drawable.bxs_message_square_dots),
+                    painter = painterResource(R.drawable.google_single_simbol),
                     contentDescription = "Logo of the app.",
                     modifier = Modifier
-                        .size(69.dp)
-                        .background(Color.White, shape = AbsoluteRoundedCornerShape(10.dp))
+                        .size(50.dp)
                 )
             }
             Spacer(
@@ -102,8 +103,8 @@ fun header(){
                 Text(
                     text = "Feedback Zone | Developers",
                     textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.headlineLarge,
-
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.background
                 )
             }
         }
