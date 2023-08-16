@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">composeActivity</string>
+    <string name="show_less">Mostrar mas</string>
+    <string name="show_more">Mostrar menos</string>
 </resources>
